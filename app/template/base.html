@@ -1,84 +1,53 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link href="{{ url_for('static', path='static') }}" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              clifford: "#da373d",
-              ourcatreads: "#2C3333",
-              catcolor: "#5F8D4E",
-              reads: "#FFC4C4",
-              background: "#F7F5EB",
-              submit_color:"#4a7a3e",
-            },
-          },
-        },
-      };
-    </script>
-  </head>
-  <body>
-    <header class="bg-ourcatreads py-2">
-      <nav class="container mx-auto flex justify-between items-center">
-        <a href="#" class="text-background font-bold text-2xl">OCR</a>
-        <img
-        align="center"
-        class="object-scale-down w-16 h-27"
-        src="{{ url_for('static',path='images/final.png') }}"
-        alt=""
-      />
-      </nav>
-    </header>
+{% extends "template.html" %} {% block content %}
+<main class="container text-center mx-auto py-8">
+  <h1 class="text-4xl font-bold gradient-title">
+    <span class="text-ourcatreads">O</span>ur
+    <span class="text-catcolor">C</span>at <span class="text-reads">R</span>eads
+  </h1>
+  <p class="w-2/4 m-auto text-center align-center justify-center">
+    Tesseract-OCR is the best OCR software due to its high accuracy and
+    versatility. It uses machine learning algorithms and statistical models to
+    recognize text from images, even in cases where the text is distorted or
+    blurry. Its ability to recognize text from images with multiple languages
+    and low resolution makes it a valuable tool for various applications.
+  </p>
+  <section class="mt-8">
+    <h2 class="text-2xl font-bold text-ourcatreads mb-4 text-center">
+      Submit Your Image
+    </h2>
 
-    <main class="container text-center mx-auto py-8">
-      <h1 class="text-4xl font-bold gradient-title">
-        <span class="text-ourcatreads">O</span>ur
-        <span class="text-catcolor">C</span>at
-        <span class="text-reads">R</span>eads
-      </h1>
-      <p class="w-2/4 m-auto text-center align-center justify-center">
-        Tesseract-OCR is the best OCR software due to its high accuracy and
-        versatility. It uses machine learning algorithms and statistical models
-        to recognize text from images, even in cases where the text is distorted
-        or blurry. Its ability to recognize text from images with multiple
-        languages and low resolution makes it a valuable tool for various
-        applications.
-      </p>
-      <section class="mt-8">
-        <h2 class="text-2xl font-bold text-ourcatreads mb-4 text-center">
-          Submit Your Image
-        </h2>
-
-        <form
-          class="container bg-gray-100 p-4 rounded-lg shadow-md h-56 w-96 mx-auto"
+    <form
+      class="container bg-gray-100 p-4 rounded-lg shadow-md h-56 w-96 mx-auto"
+      method="post"
+      action="/img-ocr"
+      enctype="multipart/form-data"
+    >
+      <div class="mb-4">
+        <label for="image" class="block font-bold text-catcolor mb-2"
+          >Upload Image</label
         >
-          <div class="mb-4">
-            <label for="image" class="block font-bold text-catcolor mb-2"
-              >Upload Image</label
-            >
-            <input
-              type="file"
-              id="image"
-              name="image"
-              accept="image/jpeg, image/png"
-              class="w-full px-3 py-2 border border-catcolor rounded-md focus:outline-none focus:ring-2 focus:ring-catcolor focus:border-catcolor transition-all duration-300"
-            />
-          </div>
-          <div class="text-center">
-            <button
-              type="submit"
-              class="bg-catcolor text-background px-4 py-2 rounded-md hover:bg-submit_color transition-colors duration-300"
-            >
-              Submit
-            </button>
-          </div>
-        </form>
-      </section>
-    </main>
-  </body>
-</html>
+        <input
+          type="hidden"
+          name="session_id"
+          id="session_id"
+          value="{{ session_id }}"
+        />
+        <input
+          type="file"
+          id="image"
+          name="file"
+          class="w-full px-3 py-2 border border-catcolor rounded-md focus:outline-none focus:ring-2 focus:ring-catcolor focus:border-catcolor transition-all duration-300"
+        />
+      </div>
+      <div class="text-center">
+        <button
+          type="submit"
+          class="bg-catcolor text-background px-4 py-2 rounded-md hover:bg-submit_color transition-colors duration-300"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </section>
+</main>
+{% endblock %}

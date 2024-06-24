@@ -1,7 +1,38 @@
-{% extends "base.html" %} {% block content %}
-<div class="text-center my-5 mx-5">
-  <div class="text-center my-5 mx-5">
-    <h1>Code On!</h1>
+{% extends "template.html" %} {% block content %}
+<main class="container mx-auto p-4">
+  <div class="bg-white border-catcolor border p-4 mt-10 rounded-lg shadow-md">
+    <h1 class="text-3xl font-bold text-black">Our Cat Reads</h1>
+    <p class="text-lg text-black">{{ text }}</p>
   </div>
-</div>
+  <div class="bg-white border-catcolor border p-4 mt-10 rounded-lg shadow-md">
+    <h3 class="text-2xl font-bold text-black">Summary</h3>
+    <p class="text-lg text-black">
+      {{ information["summary"] }}
+    </p>
+  </div>
+  <div class="bg-white border-catcolor border p-4 mt-10 rounded-lg shadow-md">
+    <h3 class="text-2xl font-bold text-black">Categories</h3>
+      <ul class="list-disc pl-6">
+        {% for category in information["categories"] %}
+        <li>{{ category }}</li>
+        {% endfor %}
+    </ul>
+  </div>
+  <div class="bg-white border-catcolor border p-4 mt-10 rounded-lg shadow-md">
+    <h3 class="text-2xl font-bold text-black">Wordcloud</h3>
+      <ul class="list-disc pl-6"></ul>
+      {% for word in information["wordcloud"] %}
+      <li>{{ word }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="bg-white border-catcolor border p-4 mt-10 rounded-lg shadow-md">
+    <h3 class="text-2xl font-bold text-black">Key Points</h3>
+    <ul class="list-disc pl-6">
+      {% for point in information["key_points"] %}
+      <li>{{ point }}</li>
+      {% endfor %}
+  </ul>
+  </div>
+</main>
 {% endblock %}

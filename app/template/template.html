@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="{{ url_for('static', path='static') }}" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: "#da373d",
+              ourcatreads: "#2C3333",
+              catcolor: "#5F8D4E",
+              reads: "#FFC4C4",
+              background: "#F7F5EB",
+              submit_color: "#4a7a3e",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body>
+    <header class="bg-ourcatreads py-2">
+      <nav class="container mx-auto flex justify-between items-center">
+        <a href="#" class="text-background font-bold text-2xl">OCR</a>
+        <img
+          align="center"
+          class="object-scale-down w-16 h-27"
+          src="{{ url_for('static',path='images/final.png') }}"
+          alt=""
+        />
+      </nav>
+    </header>
+    {% block content %} {% endblock %}
+  </body>
+</html>
